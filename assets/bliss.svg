@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f7fd4"/>
+      <stop offset="0.45" stop-color="#7db6ea"/>
+      <stop offset="0.75" stop-color="#cfe4f2"/>
+      <stop offset="1" stop-color="#e8f2ea"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7cb946"/>
+      <stop offset="0.5" stop-color="#5da131"/>
+      <stop offset="1" stop-color="#3f7d1e"/>
+    </linearGradient>
+    <linearGradient id="hill2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#96cc5c"/>
+      <stop offset="1" stop-color="#66a835"/>
+    </linearGradient>
+    <radialGradient id="cloud" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="0.7" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <!-- clouds -->
+  <g>
+    <ellipse cx="260" cy="200" rx="150" ry="42" fill="url(#cloud)"/>
+    <ellipse cx="360" cy="170" rx="100" ry="30" fill="url(#cloud)"/>
+    <ellipse cx="1180" cy="130" rx="190" ry="36" fill="url(#cloud)"/>
+    <ellipse cx="1300" cy="170" rx="110" ry="26" fill="url(#cloud)"/>
+    <ellipse cx="700" cy="90" rx="130" ry="24" fill="url(#cloud)" opacity="0.8"/>
+    <ellipse cx="1420" cy="330" rx="120" ry="26" fill="url(#cloud)" opacity="0.7"/>
+  </g>
+  <!-- far hill -->
+  <path d="M0,760 C300,690 520,720 760,700 C1020,678 1240,700 1600,660 L1600,1000 L0,1000 Z" fill="url(#hill2)"/>
+  <!-- main hill -->
+  <path d="M0,860 C220,760 430,690 690,672 C960,652 1220,690 1600,730 L1600,1000 L0,1000 Z" fill="url(#hill)"/>
+  <!-- hill highlights -->
+  <path d="M0,860 C220,760 430,690 690,672 C960,652 1220,690 1600,730 L1600,760 C1220,720 960,682 690,702 C430,720 220,790 0,890 Z" fill="#8ed05a" opacity="0.45"/>
+  <path d="M0,930 C300,850 560,800 900,790 C1200,780 1420,800 1600,820 L1600,1000 L0,1000 Z" fill="#356e18" opacity="0.5"/>
+</svg>

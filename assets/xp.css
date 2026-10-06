@@ -1,0 +1,477 @@
+/* ============================================================
+   Windows XP "Luna" 蓝色主题重建 —— 2007 数字生活博物馆核心样式
+   基于 Windows XP RTM Luna 视觉规范的 CSS 近似重建
+   ============================================================ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  font-family: "SimSun", "宋体", "NSimSun", Tahoma, "Microsoft YaHei", sans-serif;
+  font-size: 12px;
+  color: #000;
+  background: #3a6ea5;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+::selection { background: #316ac5; color: #fff; }
+
+/* ---------------- 桌面 ---------------- */
+#desktop {
+  position: absolute; inset: 0;
+  background: url(../assets/bliss.svg) no-repeat center center;
+  background-size: cover;
+  overflow: hidden;
+}
+
+/* ---------------- 桌面图标 ---------------- */
+.desk-icon {
+  position: absolute;
+  width: 76px;
+  padding: 4px 2px 2px;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+.desk-icon .icon-gfx {
+  width: 40px; height: 40px; margin: 0 auto;
+  filter: drop-shadow(1px 2px 2px rgba(0,0,0,.55));
+}
+.desk-icon .icon-gfx svg { width: 40px; height: 40px; display: block; }
+.desk-icon .icon-label {
+  margin-top: 3px;
+  color: #fff;
+  font-size: 12px;
+  line-height: 14px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.8);
+  word-break: break-all;
+}
+.desk-icon:hover { background: rgba(49,106,206,.35); border-color: rgba(49,106,206,.6); }
+.desk-icon.selected {
+  background: rgba(49,106,206,.45);
+  border-color: rgba(49,106,206,.9);
+}
+.desk-icon.selected .icon-label { background: #316ac5; }
+
+/* ---------------- XP 窗口 ---------------- */
+.xp-win {
+  position: absolute;
+  background: #ece9d8;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 2px 4px 14px rgba(0,0,0,.45);
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  min-height: 100px;
+  border: 1px solid #0831d9;
+  border-top: none;
+}
+.xp-win.inactive { box-shadow: 1px 2px 8px rgba(0,0,0,.3); }
+
+.xp-titlebar {
+  height: 28px;
+  padding: 0 3px 0 5px;
+  display: flex; align-items: center;
+  border-radius: 7px 7px 0 0;
+  background: linear-gradient(180deg,
+    #0058ee 0%, #3f8cf7 4%, #0054e6 6%, #0054e6 8%,
+    #2b73f2 20%, #2b73f2 24%, #0054e6 28%, #2b73f2 40%,
+    #0054e6 48%, #0054e6 60%, #1f6cf0 66%, #0054e6 76%,
+    #0054e6 90%, #0047d8 100%);
+  border-top: 1px solid #063fb2;
+  flex: none;
+}
+.xp-win.inactive .xp-titlebar {
+  background: linear-gradient(180deg, #7ba2e7 0%, #7ba2e7 60%, #6f97dd 100%);
+}
+.xp-titlebar .t-icon { width: 18px; height: 18px; margin-right: 4px; flex: none; }
+.xp-titlebar .t-icon svg { width: 18px; height: 18px; display: block; }
+.xp-titlebar .t-text {
+  flex: 1;
+  color: #fff;
+  font-weight: bold;
+  font-family: Tahoma, "SimSun", sans-serif;
+  font-size: 13px;
+  letter-spacing: .3px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  padding-bottom: 2px;
+}
+.xp-titlebar .t-btns { display: flex; gap: 2px; flex: none; }
+.t-btn {
+  width: 21px; height: 21px;
+  border-radius: 3px;
+  border: 1px solid #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 0 2px rgba(255,255,255,.8);
+  cursor: default;
+}
+.t-btn svg { width: 11px; height: 11px; }
+.t-btn.min { background: linear-gradient(180deg, #45a0fd 0%, #1c70d8 40%, #0d5bd0 100%); }
+.t-btn.max { background: linear-gradient(180deg, #45a0fd 0%, #1c70d8 40%, #0d5bd0 100%); }
+.t-btn.close { background: linear-gradient(180deg, #f19a86 0%, #e04b24 40%, #c33e17 100%); }
+.t-btn:hover { filter: brightness(1.18); }
+.t-btn:active { filter: brightness(.85); }
+.xp-win.inactive .t-btn { opacity: .75; }
+
+.xp-win-body {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex; flex-direction: column;
+  background: #ece9d8;
+  border-left: 3px solid #0f50d9;
+  border-right: 3px solid #0f50d9;
+  border-bottom: 3px solid #0f50d9;
+}
+.xp-win.maximized { border-radius: 0; }
+.xp-win.maximized .xp-titlebar { border-radius: 0; }
+
+/* ---------------- 任务栏 ---------------- */
+#taskbar {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 30px;
+  display: flex; align-items: stretch;
+  z-index: 9000;
+  background: linear-gradient(180deg,
+    #1f6aec 0%, #3f8cf3 4%, #1f6aec 8%, #2b73f0 12%,
+    #2b73f0 14%, #1f6aec 18%, #1f6aec 22%, #3b7ff2 32%,
+    #2b73f0 42%, #1f6aec 55%, #1f6aec 92%, #1941a5 100%);
+  border-top: 1px solid #6bacf5;
+}
+#start-btn {
+  flex: none;
+  width: 100px; height: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  background: linear-gradient(180deg, #3c9338 0%, #398e35 6%, #377f2a 30%, #2c7121 50%, #35802a 55%, #4c9a3e 95%, #59a94a 100%);
+  border-radius: 0 12px 12px 0;
+  box-shadow: 1px 0 3px rgba(0,0,0,.4);
+  color: #fff;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 17px;
+  font-family: Tahoma, "SimSun", sans-serif;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.7);
+  padding-right: 12px;
+}
+#start-btn:hover { filter: brightness(1.15); }
+#start-btn.pressed { filter: brightness(.85); }
+#start-btn .winflag {
+  width: 20px; height: 20px; flex: none;
+  filter: drop-shadow(1px 1px 1px rgba(0,0,0,.6));
+}
+#start-btn .winflag svg { width: 20px; height: 20px; display: block; }
+
+#task-buttons {
+  flex: 1;
+  display: flex; align-items: stretch; gap: 3px;
+  padding: 3px 4px;
+  overflow: hidden;
+}
+.task-btn {
+  min-width: 60px; max-width: 165px;
+  flex: 0 1 auto;
+  display: flex; align-items: center; gap: 4px;
+  padding: 0 8px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #4993f0 0%, #3a80e5 8%, #2b6cd8 45%, #2b6cd8 90%, #2456b8 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -1px 0 rgba(0,0,0,.25);
+  color: #fff;
+  white-space: nowrap; overflow: hidden;
+}
+.task-btn .tb-icon { width: 16px; height: 16px; flex: none; }
+.task-btn .tb-icon svg { width: 16px; height: 16px; display: block; }
+.task-btn .tb-text {
+  font-size: 12px; overflow: hidden; text-overflow: ellipsis;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+}
+.task-btn:hover { filter: brightness(1.15); }
+.task-btn.active {
+  background: linear-gradient(180deg, #1c4f9e 0%, #2661b5 10%, #2b6cd8 50%, #1d4d9b 100%);
+  box-shadow: inset 1px 1px 3px rgba(0,0,0,.5);
+}
+
+#tray {
+  flex: none;
+  display: flex; align-items: center; gap: 7px;
+  padding: 0 10px 0 12px;
+  background: linear-gradient(180deg, #0e93f3 0%, #14a5f7 8%, #0e93f3 30%, #0c8be9 60%, #0d8ae4 92%, #0b6fc0 100%);
+  box-shadow: inset 2px 0 3px rgba(0,0,0,.35);
+  border-left: 1px solid #0b74cf;
+  color: #fff;
+}
+#tray .tray-ico { width: 16px; height: 16px; cursor: default; position: relative; }
+#tray .tray-ico svg { width: 16px; height: 16px; display: block; filter: drop-shadow(1px 1px 1px rgba(0,0,0,.5)); }
+#tray-clock {
+  font-family: Tahoma, "SimSun", sans-serif;
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+  padding-left: 2px;
+  min-width: 58px;
+}
+
+/* ---------------- 开始菜单 ---------------- */
+#start-menu {
+  position: absolute; left: 0; bottom: 30px;
+  width: 400px;
+  z-index: 9500;
+  display: none;
+  flex-direction: column;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 2px -3px 12px rgba(0,0,0,.5);
+  overflow: hidden;
+  border: 1px solid #0f3faa;
+}
+#start-menu.open { display: flex; }
+.sm-header {
+  height: 56px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 12px;
+  background: linear-gradient(180deg, #1c62d2 0%, #2b7bf0 40%, #3685f2 90%, #3f8cf3 100%);
+  border-bottom: 2px solid #f5a62300;
+}
+.sm-header .avatar {
+  width: 42px; height: 42px;
+  border: 2px solid #cfe0ff;
+  border-radius: 4px;
+  background: #7ba2e7;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.sm-header .avatar svg { width: 38px; height: 38px; }
+.sm-header .uname {
+  color: #fff; font-size: 15px; font-weight: bold;
+  font-family: Tahoma, "SimSun", sans-serif;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.7);
+}
+.sm-body { display: flex; background: #fff; border-top: 1px solid #0f3faa; }
+.sm-left {
+  width: 55%;
+  background: #fff;
+  padding: 6px 4px;
+  border-right: 1px solid #aac2ee;
+}
+.sm-right {
+  width: 45%;
+  background: linear-gradient(180deg, #d3e5fa, #cfe0fa);
+  padding: 6px 4px;
+}
+.sm-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 4px 8px;
+  border-radius: 2px;
+  color: #00107d;
+}
+.sm-item .si-ico { width: 24px; height: 24px; flex: none; }
+.sm-item .si-ico svg { width: 24px; height: 24px; display: block; }
+.sm-item .si-text { font-size: 12px; }
+.sm-item:hover { background: #2f71cd; color: #fff; }
+.sm-item:hover .si-text { color: #fff; }
+.sm-sep { height: 1px; background: #c8d8f0; margin: 4px 6px; }
+.sm-brand {
+  padding: 2px 8px 6px;
+  color: #7a8ba8; font-size: 11px; font-family: Tahoma; text-align: right;
+}
+.sm-footer {
+  height: 38px;
+  display: flex; align-items: center; justify-content: flex-end; gap: 14px;
+  padding: 0 14px;
+  background: linear-gradient(180deg, #2b7bf0 0%, #1c62d2 50%, #174cb8 100%);
+}
+.sm-fbtn {
+  display: flex; align-items: center; gap: 6px;
+  color: #fff; font-size: 12px;
+  padding: 3px 8px; border-radius: 3px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+}
+.sm-fbtn svg { width: 20px; height: 20px; }
+.sm-fbtn:hover { background: rgba(255,255,255,.2); }
+
+/* ---------------- 右键菜单 ---------------- */
+.ctx-menu {
+  position: absolute;
+  z-index: 9999;
+  background: #fff;
+  border: 1px solid #a0a0a0;
+  box-shadow: 3px 3px 6px rgba(0,0,0,.3);
+  padding: 2px;
+  min-width: 140px;
+}
+.ctx-item {
+  padding: 4px 20px 4px 24px;
+  color: #000;
+  white-space: nowrap;
+}
+.ctx-item:hover { background: #316ac5; color: #fff; }
+.ctx-sep { height: 1px; background: #d8d5cc; margin: 2px 4px; }
+
+/* ---------------- 通用控件 ---------------- */
+.xp-btn {
+  min-width: 72px;
+  padding: 3px 12px;
+  font-family: "SimSun", "宋体", Tahoma, sans-serif;
+  font-size: 12px;
+  background: linear-gradient(180deg, #fff 0%, #ecebe5 42%, #dcd8c8 84%, #f4f2e8 100%);
+  border: 1px solid #7f9db9;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 1px #fff;
+  color: #000;
+}
+.xp-btn:hover { border-color: #e59700; box-shadow: inset 0 0 0 1px #fff, 0 0 2px #ffa340; }
+.xp-btn:active { background: linear-gradient(180deg, #dcd8c8 0%, #ecebe5 100%); }
+.xp-btn.primary { border-color: #3c7fb1; }
+
+.xp-input, .xp-select {
+  font-family: "SimSun", "宋Sun", Tahoma, sans-serif;
+  font-size: 12px;
+  border: 1px solid #7f9db9;
+  padding: 2px 4px;
+  background: #fff;
+  color: #000;
+}
+.xp-input:focus { border-color: #3c7fb1; outline: none; }
+
+.xp-menubar {
+  display: flex; gap: 2px;
+  padding: 2px 4px;
+  background: #ece9d8;
+  border-bottom: 1px solid #d4d0c4;
+  flex: none;
+}
+.xp-menubar .m-item { padding: 2px 7px; }
+.xp-menubar .m-item:hover, .xp-menubar .m-item.open { background: #316ac5; color: #fff; }
+
+.xp-toolbar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 3px 6px;
+  background: linear-gradient(180deg, #fdfdfd 0%, #f2f1ea 45%, #e6e3d6 90%, #eeedE4 100%);
+  border-bottom: 1px solid #c9c6bb;
+  flex: none;
+}
+.xp-statusbar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 2px 8px;
+  background: #ece9d8;
+  border-top: 1px solid #d4d0c4;
+  flex: none;
+  color: #444;
+}
+.xp-statusbar .sb-block {
+  border: 1px solid #d4d0c4;
+  border-right-color: #fff; border-bottom-color: #fff;
+  padding: 1px 8px;
+  height: 18px; display: flex; align-items: center;
+}
+
+/* 滚动条（XP 风格近似） */
+.xp-scroll::-webkit-scrollbar { width: 16px; height: 16px; }
+.xp-scroll::-webkit-scrollbar-track { background: #f1efe2; border-left: 1px solid #d4d0c4; }
+.xp-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #fff 0%, #ece9d8 40%, #d6d2c0 90%);
+  border: 1px solid #a0a0a0;
+  border-radius: 2px;
+}
+.xp-scroll::-webkit-scrollbar-thumb:hover { background: linear-gradient(90deg, #fff 0%, #f4e6c8 40%, #e6cfa0 90%); }
+.xp-scroll::-webkit-scrollbar-corner { background: #f1efe2; }
+
+/* 气泡提示（托盘通知） */
+.tray-balloon {
+  position: absolute;
+  right: 12px; bottom: 38px;
+  width: 260px;
+  background: #ffffe1;
+  border: 1px solid #8c8c8c;
+  border-radius: 6px;
+  box-shadow: 2px 3px 8px rgba(0,0,0,.35);
+  padding: 10px 12px 8px;
+  z-index: 9800;
+}
+.tray-balloon .balloon-title {
+  font-weight: bold; color: #0054e6; margin-bottom: 4px;
+  display: flex; align-items: center; gap: 5px;
+}
+.tray-balloon .balloon-title svg { width: 16px; height: 16px; }
+
+/* ---------------- 开机流程 ---------------- */
+#boot { position: absolute; inset: 0; background: #000; z-index: 20000; color: #c0c0c0; }
+#boot .bios {
+  font-family: "Courier New", monospace;
+  font-size: 14px; line-height: 19px;
+  padding: 24px 40px;
+  color: #b0b0b0;
+  white-space: pre;
+}
+#boot .bios .bios-hl { color: #fff; }
+
+#xp-bootlogo {
+  position: absolute; inset: 0; z-index: 20000;
+  background: #000;
+  display: none;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 40px;
+}
+#xp-bootlogo .xplg { width: 210px; }
+#xp-bootlogo .xplg svg { width: 210px; display: block; }
+#xp-bootlogo .bootbar {
+  width: 160px; height: 14px;
+  border: 1px solid #6b6b6b; border-radius: 7px;
+  padding: 2px;
+  display: flex; gap: 3px;
+}
+#xp-bootlogo .bootbar .seg {
+  flex: 1; border-radius: 50%;
+  background: linear-gradient(180deg, #7ab7ff 0%, #1f6cf0 45%, #0a48c8 100%);
+  opacity: 0;
+}
+
+#login-screen {
+  position: absolute; inset: 0; z-index: 20000;
+  display: none;
+  flex-direction: column;
+  background: linear-gradient(120deg, #5a7edc 0%, #3a6ea5 100%);
+}
+#login-screen .ls-band { height: 82px; background: linear-gradient(180deg, #5a7edc 0%, #5a7edc 45%, #4b6fd2 55%, #3a6ea5 100%); flex: none; }
+#login-screen .ls-band.bottom { background: linear-gradient(0deg, #245edb 0%, #2b73f0 35%, #3a6ea5 100%); }
+#login-screen .ls-mid {
+  flex: 1;
+  display: flex; align-items: center;
+  background: linear-gradient(120deg, #5a7edc 0%, #3a6ea5 100%);
+}
+#login-screen .ls-divider {
+  width: 2px; align-self: stretch; margin: 30px 0;
+  background: linear-gradient(180deg, transparent, #9fbde8, transparent);
+}
+#login-screen .ls-left, #login-screen .ls-right { flex: 1; display: flex; align-items: center; justify-content: center; }
+#login-screen .ls-logo { text-align: center; color: #fff; }
+#login-screen .ls-logo .lgo-svg { width: 220px; }
+#login-screen .ls-logo .lgo-svg svg { width: 220px; }
+#login-screen .ls-logo .ls-tip { font-family: Tahoma; font-size: 14px; margin-top: 14px; opacity: .9; }
+#login-screen .ls-user {
+  display: flex; align-items: center; gap: 14px;
+  padding: 10px 18px; border-radius: 8px;
+  cursor: default;
+}
+#login-screen .ls-user:hover { background: rgba(255,255,255,.14); }
+#login-screen .ls-user .lu-ava {
+  width: 64px; height: 64px;
+  border: 2px solid #9fbde8; border-radius: 4px;
+  overflow: hidden; background: #7ba2e7;
+}
+#login-screen .ls-user .lu-ava svg { width: 60px; height: 60px; }
+#login-screen .ls-user .lu-name {
+  color: #fff; font-size: 20px; font-family: Tahoma, "Microsoft YaHei", "SimSun";
+  font-weight: bold; text-shadow: 1px 1px 3px rgba(0,0,0,.6);
+}
+
+/* ---------------- 杂项 ---------------- */
+.icon-shadow { filter: drop-shadow(1px 2px 2px rgba(0,0,0,.45)); }
+.helper-hint { color: #808080; font-size: 11px; }
+blink-cursor { display: inline-block; width: 7px; background: #000; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* 拖动中禁用 iframe/文本选择 */
+.dragging, .dragging * { cursor: move !important; }
